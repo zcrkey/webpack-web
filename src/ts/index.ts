@@ -1,6 +1,10 @@
 import { Utils } from './utils';
+import "../assets/scss/base.scss";
+import "../assets/css/key.css";
 
-console.log('系统时间:', Utils.getSystemDate());
+// TODO:公共css未提取
+
+console.log('系统时间-index:', Utils.getSystemDate());
 
 /**
  * 用户登录
@@ -28,7 +32,7 @@ window.onload = function () {
   // 注册跳转
   let registerBtn = document.getElementById('register');
   if (!!registerBtn) {
-    loginBtn.addEventListener('click', () => {
+    registerBtn.addEventListener('click', () => {
       window.location.href = "register.html";
     });
   }

@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 // 打包html的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+//打包css的插件
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 将单个文件或整个目录复制到构建目录 插件
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -27,8 +29,11 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js']
   },
 
+  // 模板
   module: {
     rules: [
+
+      // es6 转 es5
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
@@ -45,12 +50,38 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/
-      }
+      },
+
+      // css
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+
     ]
   },
 
   //插件
   plugins: [
+
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[chunkHash].css',
+      chunkFilename: '[id].css',
+    }),
+
+    new CopyWebpackPlugin([
+      { from: 'src/assets/img', to: 'assets/img' }
+    ]),
 
     new HtmlWebpackPlugin({
       // 输出文件的路径
@@ -73,9 +104,6 @@ module.exports = {
       chunks: ['register']
     }),
 
-    new CopyWebpackPlugin([
-      { from: 'src/assets/css', to: 'assets/css' },
-      { from: 'src/assets/img', to: 'assets/img' },
-    ])
+
   ]
 }
