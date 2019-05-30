@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 // 打包html的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//打包css的插件
+// 打包css的插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 将单个文件或整个目录复制到构建目录 插件
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -76,7 +76,7 @@ module.exports = {
 
     new MiniCssExtractPlugin({
       filename: 'css/[name].[chunkHash].css',
-      chunkFilename: '[id].css',
+      // chunkFilename: '[id].css',
     }),
 
     new CopyWebpackPlugin([
