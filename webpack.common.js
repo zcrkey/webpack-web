@@ -64,6 +64,24 @@ module.exports = {
         ],
       },
 
+      // css 图像文件装载器
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              // 名称
+              name: '[name].[ext]',
+              // 输出路径
+              outputPath:'assets/img/',
+              // 公共路径
+              publicPath:'../assets/img/'
+            }
+          }
+        ]
+      }
+
     ]
   },
 

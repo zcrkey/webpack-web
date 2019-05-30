@@ -1,6 +1,7 @@
 import { Utils } from './utils';
 import "../assets/scss/base.scss";
 import "../assets/css/key.css";
+import "../assets/scss/index.scss";
 
 // TODO:公共css未提取
 
