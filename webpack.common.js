@@ -1,7 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
-// 打包html的插件
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// 入口文件
+const entry = require('./webpack.entry.js');
+// html 插件
+const pluginsHtml = require("./webpack.plugins.html.js")
+
 // 打包css的插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 将单个文件或整个目录复制到构建目录 插件
@@ -10,14 +13,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
 
   // 入口文件
-  entry: {
-    // 首页
-    'index': './src/ts/index.ts',
-    // 登录页
-    'login': './src/ts/login.ts',
-    // 注册页
-    'register': './src/ts/register.ts'
-  },
+  entry: entry,
 
   // 输出文件
   output: {
@@ -83,27 +79,5 @@ module.exports = {
       { from: 'src/assets/img', to: 'assets/img' }
     ]),
 
-    new HtmlWebpackPlugin({
-      // 输出文件的路径
-      filename: 'index.html',
-      // 源文件路径
-      template: 'src/page/index.html',
-      // 
-      chunks: ['index']
-    }),
-
-    new HtmlWebpackPlugin({
-      filename: 'login.html',
-      template: 'src/page/login.html',
-      chunks: ['login']
-    }),
-
-    new HtmlWebpackPlugin({
-      filename: 'register.html',
-      template: 'src/page/register.html',
-      chunks: ['register']
-    }),
-
-
-  ]
+  ].concat(pluginsHtml)
 }
