@@ -74,12 +74,30 @@ module.exports = {
               // 名称
               name: '[name].[ext]',
               // 输出路径
-              outputPath:'assets/img/',
+              outputPath: 'assets/img/',
               // 公共路径
-              publicPath:'../assets/img/'
+              publicPath: '../assets/img/'
             }
           }
         ]
+      },
+
+      // css 字体库
+      {
+        test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            // 名称
+            name: '[name].[ext]',
+            // 字体文件大小小于等于5KB，使用64位的svg; 否则输出文件
+            limit: 5000,
+            // 输出路径
+            outputPath: 'assets/fonts/',
+            // 公共路径
+            publicPath: '../assets/fonts/'
+          }
+        }
       }
 
     ]
@@ -94,7 +112,8 @@ module.exports = {
     }),
 
     new CopyWebpackPlugin([
-      { from: 'src/assets/img', to: 'assets/img' }
+      { from: 'src/assets/img', to: 'assets/img' },
+      { from: 'src/assets/fonts', to: 'assets/fonts' }
     ]),
 
   ].concat(pluginsHtml)

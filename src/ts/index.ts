@@ -2,6 +2,7 @@ import { Utils } from './utils';
 import "../assets/scss/base.scss";
 import "../assets/css/key.css";
 import "../assets/scss/index.scss";
+import "../assets/fonts/font-awesome.min.css"
 
 // TODO:公共css未提取
 
